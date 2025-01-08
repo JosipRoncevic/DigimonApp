@@ -5,14 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.motion.widget.MotionScene.Transition.TransitionOnClick
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class DigimonAdapter(private val digimonList: List<Digimon>) : RecyclerView.Adapter<DigimonAdapter.DigimonViewHolder>() {
+class DigimonAdapter(
+    private val digimonList: List<Digimon>,
+    private val onItemClick:(Digimon) -> Unit) : RecyclerView.Adapter<DigimonAdapter.DigimonViewHolder>() {
 
     class DigimonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val digimonName: TextView = itemView.findViewById(R.id.digimonName)
-        val digimonLevel: TextView = itemView.findViewById(R.id.digimonLevel)
         val digimonImage: ImageView = itemView.findViewById(R.id.digimonImage)
     }
 
@@ -24,8 +26,11 @@ class DigimonAdapter(private val digimonList: List<Digimon>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: DigimonViewHolder, position: Int) {
         val digimon = digimonList[position]
         holder.digimonName.text = digimon.name
-        holder.digimonLevel.text = digimon.level
         Glide.with(holder.itemView.context).load(digimon.img).into(holder.digimonImage)
+
+        holder.itemView.setOnClickListener{
+            onItemClick(digimon)
+        }
     }
 
     override fun getItemCount(): Int {

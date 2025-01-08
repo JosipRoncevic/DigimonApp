@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".AllDigimonActivity"/>
+        <activity android:name=".DigimonDetailActivity"/>
     </application>
 
 </manifest>
