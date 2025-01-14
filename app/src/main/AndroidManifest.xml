@@ -25,6 +25,8 @@
 
         <activity android:name=".AllDigimonActivity"/>
         <activity android:name=".DigimonDetailActivity"/>
+        <activity android:name=".FavouriteDigimonActivity"/>
+        <activity android:name=".RandomDigimonActivity"/>
     </application>
 
 </manifest>

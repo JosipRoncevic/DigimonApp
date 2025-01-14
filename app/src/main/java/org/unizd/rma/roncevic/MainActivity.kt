@@ -14,6 +14,17 @@ class MainActivity : AppCompatActivity() {
         btnAllDigimons.setOnClickListener {
             val intent = Intent(this, AllDigimonActivity::class.java)
             startActivity(intent)
+
+        }
+        val btnFavDigimons: Button = findViewById(R.id.btn_fav_digimons)
+        btnFavDigimons.setOnClickListener {
+            val intent = Intent(this, FavouriteDigimonActivity::class.java)
+            startActivity(intent)
+        }
+        val btnRandDigimons: Button = findViewById(R.id.rand_digimon)
+        btnRandDigimons.setOnClickListener {
+            val intent = Intent(this, RandomDigimonActivity::class.java)
+            startActivity(intent)
         }
     }
 }
