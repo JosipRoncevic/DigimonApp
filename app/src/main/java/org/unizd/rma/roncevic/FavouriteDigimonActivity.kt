@@ -1,6 +1,7 @@
 package org.unizd.rma.roncevic
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,20 +30,20 @@ class FavouriteDigimonActivity : AppCompatActivity() {
     private fun loadFavoriteDigimons() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Fetch all Digimons from the API
                 val allDigimons = fetchDigimonsFromApi()
 
-                // Get favorite names from SharedPreferences
                 val favoriteNames = getFavoriteNames()
 
-                // Filter Digimons by favorite names
                 val favoriteDigimons = allDigimons.filter { favoriteNames.contains(it.name) }
 
-                // Update UI on the main thread
                 withContext(Dispatchers.Main) {
                     if (favoriteDigimons.isNotEmpty()) {
                         adapter = DigimonAdapter(favoriteDigimons) { digimon ->
-                            // Handle item click if needed
+                            val intent = Intent(this@FavouriteDigimonActivity, DigimonDetailActivity::class.java)
+                            intent.putExtra("DIGIMON_NAME", digimon.name)
+                            intent.putExtra("DIGIMON_IMAGE", digimon.img)
+                            intent.putExtra("DIGIMON_LEVEL", digimon.level)
+                            startActivity(intent)
                         }
                         recyclerView.adapter = adapter
                     } else {
